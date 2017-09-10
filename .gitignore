@@ -19,7 +19,6 @@
 *.zip
 .idea
 target
-.settings
 
 
 # Logs and databases #
