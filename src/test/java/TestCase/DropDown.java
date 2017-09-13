@@ -1,5 +1,4 @@
 package TestCase;
-import Iniitialize.Init;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,17 +9,21 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import iniitialize.Init;
+
 import java.util.List;
 
-public class DropDown {
+public class DropDown extends Init {
     WebDriver driver;
     WebDriverWait wait;
     Select dropdown;
     List<WebElement> options;
-    Init init = new Init(driver);
+    Init init = new Init();
+    
     @BeforeClass
     public void setup() {
-        driver = init.setup("http://the-internet.herokuapp.com/dropdown", "chrome");
+    	driver = super.getDriver();
+    	driver.get("http://the-internet.herokuapp.com/dropdown");
         wait = new WebDriverWait(driver, 30);
         dropdown = new Select(driver.findElement(By.id("dropdown")));
     }
@@ -42,8 +45,4 @@ public class DropDown {
     }
 
 
-    @AfterClass
-    public void teardown() {
-        init.tearDown();
-    }
 }

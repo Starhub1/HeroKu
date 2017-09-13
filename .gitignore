@@ -19,6 +19,7 @@
 *.zip
 .idea
 target
+test-output
 
 
 # Logs and databases #

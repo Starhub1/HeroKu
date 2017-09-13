@@ -1,50 +1,42 @@
-package Iniitialize;
-
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+package iniitialize;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+
 public class Init {
 
-    WebDriver dr;
+	
+	public  WebDriver dr;
+	Util util;
+	
+public WebDriver getDriver() {
+	return dr;
+}
 
-    public Init(WebDriver driver) {
-        this.dr = driver;
-    }
+@BeforeClass
+    public void setup() {
 
-    public WebDriver setup(String url, String browser) {
-
-        switch (browser.toLowerCase()) {
-            case "edge":
-                System.setProperty("webdriver.edge.driver", "src\\test\\Resource\\MicrosoftWebDriver.exe");
-                dr = new EdgeDriver();
-                break;
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", "C:\\Users\\nasir\\Downloads\\Compressed\\chromedriver_win32\\chromedriver.exe");
+              System.setProperty("webdriver.chrome.driver", "src\\test\\Resource\\chromedriver_win32\\chromedriver.exe");
                 dr = new ChromeDriver();
-                break;
 
-            case "firefox":
-                System.setProperty("webdriver.gecko.driver", "C:\\Users\\nasir\\Downloads\\Compressed\\geckodriver-v0.18.0-win64\\geckodriver.exe");
-                dr = new FirefoxDriver();
-                break;
-        }
+       
 
         dr.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         dr.manage().timeouts().pageLoadTimeout(50, TimeUnit.SECONDS);
         dr.manage().timeouts().setScriptTimeout(30, TimeUnit.SECONDS);
-        dr.get(url);
-        //dr.manage().window().maximize();
-        return dr;
     }
 
-
+    
+    
+@AfterClass
     public void tearDown() {
-        dr.quit();
+    	dr.quit();
     }
 
 
-}
+    
+  }
