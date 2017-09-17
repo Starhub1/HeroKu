@@ -9,7 +9,7 @@ public class DatePickerLocator {
     @FindBy(id = "datepicker")
     public WebElement datepicker;
 
-   public DatePickerLocator(WebDriver driver) {
-       PageFactory.initElements(driver, this);
+    public DatePickerLocator(WebDriver driver) {
+        PageFactory.initElements(driver, this);
     }
 }
