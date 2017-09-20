@@ -1,32 +1,34 @@
 package TestCase;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 import iniitialize.Init;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
 
 
 public class CheckBoxes extends Init {
 
-    WebDriverWait wait;
-    WebElement src, dst;
-    Actions a;
     WebDriver dr;
+    ExtentTest logger;
 
-    @Test(description = "To verify the Checkboxes values")
-    public void VerifyCheckBoxLabel() {
+
+    @Test(description = "To verify the Checkboxes values",testName = "Verify Checkbox functionality")
+    public void VerifyCheckBoxLabel(){
+        logger= super.getLogger();
         dr = super.getDriver();
+        logger.log(LogStatus.INFO,"Verify Checkbox functionality");
+        logger.log(LogStatus.PASS,"Browser Started");
         dr.get("http://the-internet.herokuapp.com/checkboxes");
-        System.out.println("This is a sample test");
+        logger.log(LogStatus.PASS,"Navigated to the URL : \"http://the-internet.herokuapp.com/checkboxes\" ");
         String labels = dr.findElement(By.id("checkboxes")).getText();
+        logger.log(LogStatus.PASS,"Sucessfully searched the element checkbox");
         String labelArr[] = labels.split("\n");
         for (String lbl : labelArr) {
             AssertJUnit.assertTrue(lbl.contains("checkbox"));
+            logger.log(LogStatus.PASS, lbl);
         }
     }
 
