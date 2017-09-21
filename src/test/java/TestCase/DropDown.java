@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -19,7 +20,7 @@ public class DropDown extends Init {
 
 	@Test()
 	public void VerifyDropDownValues() {
-		logger.log(LogStatus.INFO, "Verify the drop down values ");
+        logger = report.startTest("Verify Drop Down Values");
 		logger.log(LogStatus.PASS, "Browser Started");
 		driver.get("http://the-internet.herokuapp.com/dropdown");
 		logger.log(LogStatus.PASS, "Successuly navigated to the URL:");
@@ -34,13 +35,25 @@ public class DropDown extends Init {
 
 	@Test(dependsOnMethods = { "VerifyDropDownValues" })
 	public void SelectAvalue() {
-		logger = super.getLogger();
+	    logger = report.startTest("Select a value");
 		logger.log(LogStatus.INFO, "Select the vaule 1 from the drop down");
 		dropdown.selectByValue("1");
 		String s = dropdown.getFirstSelectedOption().toString();
 		logger.log(LogStatus.PASS, "Verify the selected value");
 		System.out.println("This is the select value " + s);
 		logger.log(LogStatus.PASS, "PASSED");
+	}
+
+    @Test(dependsOnMethods = {"methodFailed"})
+    public void methodSkipped() {
+	    logger=report.startTest("This test case will skipped");
+        System.out.println("This method skipped");
+    }
+
+    @Test(alwaysRun = true)
+    public void methodFailed() {
+	    logger = report.startTest("This testcase will failed");
+        Assert.assertTrue(false);
 	}
 
 }

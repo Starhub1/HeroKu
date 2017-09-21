@@ -12,7 +12,7 @@ public class CheckBoxes extends Init {
 
 	@Test(description = "To verify the Checkboxes values", testName = "Verify Checkbox functionality")
 	public void VerifyCheckBoxLabel() {
-		logger.log(LogStatus.INFO, "Verify Checkbox functionality");
+		logger = report.startTest("Verify Checkbox functionality");
 		logger.log(LogStatus.PASS, "Browser Started");
 		driver.get("http://the-internet.herokuapp.com/checkboxes");
 		logger.log(LogStatus.PASS, "Navigated to the URL : \"http://the-internet.herokuapp.com/checkboxes\" ");

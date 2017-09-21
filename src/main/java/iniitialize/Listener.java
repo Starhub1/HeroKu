@@ -1,7 +1,5 @@
-/*
 package iniitialize;
 
-import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
 import org.openqa.selenium.WebDriver;
@@ -13,48 +11,52 @@ import java.io.File;
 
 public class Listener implements ITestListener {
 
-    public ExtentReports report;
     public ExtentTest test;
-    String filepath="src\\test\\testreport\\" +String.valueOf(System.currentTimeMillis())+"\\index.html";
+    WebDriver driver;
 
-    public ExtentTest getTest() {
-        return test;
-    }
 
     @Override
-    public void onTestStart(ITestResult iTestResult) {
-        Object ctx=iTestResult.getTestContext().getAttribute("report");
-        String name =  iTestResult.getName();
-        test= ((ExtentReports) ctx).startTest(name);
-        iTestResult.getTestContext().setAttribute("logger",test);
+    public void onTestStart(ITestResult res) {
+        test =(ExtentTest) res.getAttribute("logger");
     }
 
     @Override
     public void onTestSuccess(ITestResult res) {
-            test.log(LogStatus.PASS,res.getTestName());
+        Object currentClass = res.getInstance();
+        ExtentTest test = ((Init) currentClass).getLogger() ;
+        test.log(LogStatus.PASS,res.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult res) {
-
-
             String image = null;
             System.out.println(res.getMethod().getDescription());
             Object currentClass = res.getInstance();
-            WebDriver webDriver = ((Init) currentClass).getDriver();
-            if (webDriver != null) {
-                image = Util.takeScreenShot(res.getName(),webDriver);
+            driver = ((Init) currentClass).getDriver();
+            ExtentTest test = ((Init) currentClass).getLogger();
+            if (driver != null) {
+                image = Util.takeScreenShot(res.getName(),driver);
                 image = new File(image).getAbsolutePath();
                 System.out.println(image);
             }
 
-            test.log(LogStatus.FAIL,res.getName(),"Screenshot" +
-                    test.addScreenCapture(image));
-            test.log(LogStatus.INFO,res.getThrowable().getMessage());
+        test.log(LogStatus.FAIL, res.getName(), "Screenshot" + test.addScreenCapture(image));
+        test.log(LogStatus.FAIL, res.getThrowable().getMessage());
     }
 
     @Override
-    public void onTestSkipped(ITestResult iTestResult) {
+    public void onTestSkipped(ITestResult res) {
+        test = Init.report.startTest(res.getName());
+        String image = null;
+        System.out.println(res.getMethod().getDescription());
+        if (driver != null) {
+            image = Util.takeScreenShot(res.getName(),driver);
+            image = new File(image).getAbsolutePath();
+            System.out.println(image);
+        }
+
+        test.log(LogStatus.SKIP, res.getName(), "Screenshot" + test.addScreenCapture(image));
+        test.log(LogStatus.SKIP, res.getThrowable().getMessage());
 
     }
 
@@ -65,14 +67,9 @@ public class Listener implements ITestListener {
 
     @Override
     public void onStart(ITestContext ctx) {
-        report = new ExtentReports(filepath,true);
-        ctx.setAttribute("report",report);
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        report.endTest(test);
-        report.flush();
     }
 }
-*/
