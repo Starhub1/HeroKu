@@ -6,6 +6,7 @@
 
         <classes>
             <class name="TestCase.DropDown"/>
+            <class name="TestCase.CheckBoxes"/>
         </classes>
     </test>
 
