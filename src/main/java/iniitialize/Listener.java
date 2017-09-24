@@ -39,9 +39,15 @@ public class Listener implements ITestListener {
                 image = new File(image).getAbsolutePath();
                 System.out.println(image);
             }
-
-        test.log(LogStatus.FAIL, res.getName(), "Screenshot" + test.addScreenCapture(image));
-        test.log(LogStatus.FAIL, res.getThrowable().getMessage());
+        String exception = res.getThrowable().getClass().getSimpleName();
+            if (exception.equalsIgnoreCase("NoSuchElementException")) {
+                test.log(LogStatus.ERROR, res.getName(), "Screenshot" + test.addScreenCapture(image));
+                test.log(LogStatus.ERROR,"Element Not Found Exception", res.getThrowable().getLocalizedMessage());
+            }
+            else{
+                test.log(LogStatus.FAIL, res.getName(), "Screenshot" + test.addScreenCapture(image));
+                test.log(LogStatus.FAIL, res.getThrowable().getLocalizedMessage());
+            }
     }
 
     @Override

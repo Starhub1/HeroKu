@@ -2,6 +2,7 @@ package TestCase;
 
 import org.openqa.selenium.By;
 import org.testng.AssertJUnit;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -10,6 +11,7 @@ import iniitialize.Init;
 
 public class CheckBoxes extends Init {
 
+	@Parameters(value = "Browser")
 	@Test(description = "To verify the Checkboxes values", testName = "Verify Checkbox functionality")
 	public void VerifyCheckBoxLabel() {
 		logger = report.startTest("Verify Checkbox functionality");

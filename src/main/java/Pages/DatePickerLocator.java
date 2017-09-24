@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class DatePickerLocator {
-    @FindBy(id = "datepicker")
+    @FindBy(id = "datepicke")
     public WebElement datepicker;
 
     public DatePickerLocator(WebDriver driver) {
