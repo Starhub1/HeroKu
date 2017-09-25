@@ -1,13 +1,10 @@
 package iniitialize;
 
-import com.relevantcodes.extentreports.ExtentReports;
-import com.relevantcodes.extentreports.ExtentTest;
-import org.openqa.selenium.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
@@ -15,11 +12,10 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
 
-import java.util.concurrent.TimeUnit;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
 
-public class Init{
-
-
+public class Init {
 
 	public WebDriver driver;
 	public WebDriverWait wait;
@@ -28,19 +24,19 @@ public class Init{
 	public WebDriver getDriver() {
 		return driver;
 	}
+
 	public ExtentTest getLogger() {
 		return logger;
 	}
 
 	public ExtentTest logger;
 	public static ExtentReports report;
-	String filepath="src\\test\\testreport\\" +String.valueOf(System.currentTimeMillis())+"\\index.html";
-
+	public static String filepath = "./test-results/" + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
 
 	@BeforeSuite
 	public void beforesuite(ITestContext ctx) {
-		report = new ExtentReports(filepath,true);
-		ctx.setAttribute("logger",logger);
+		report = new ExtentReports(filepath, true);
+		ctx.setAttribute("logger", logger);
 	}
 
 	@AfterSuite
@@ -57,7 +53,7 @@ public class Init{
 		options.addArguments("start-maximized");
 		options.addArguments("incognito");
 		options.addArguments("–disable-images");
-		//options.addArguments("--headless");
+		// options.addArguments("--headless");
 		driver = new ChromeDriver(options);
 		wait = new WebDriverWait(driver, 20);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
