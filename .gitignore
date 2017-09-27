@@ -21,6 +21,7 @@
 target
 test-output
 testreport
+test-results
 
 
 # Logs and databases #

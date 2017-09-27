@@ -3,16 +3,12 @@ package TestCase;
 import Pages.DynamicControlLocator;
 import com.relevantcodes.extentreports.LogStatus;
 import iniitialize.Init;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 
-import javax.annotation.Nullable;
-import java.util.function.Function;
-
-import static org.testng.Assert.*;
 import static Pages.DynamicControlLocator.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class DynamicControls extends Init{
     DynamicControlLocator dynamicControlPage;

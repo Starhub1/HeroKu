@@ -1,19 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite2" verbose="1">
-
-    <listeners>
-        <listener class-name="iniitialize.Listener"/>
-
-    </listeners>
-
-
-    <test name="Group" preserve-order="true" parallel="classes" thread-count="2">
-
-        <classes>
-            <class name="TestCase.CheckBoxes"/>
-            <class name="TestCase.MouseHover"/>
-            <class name="TestCase.DatePicker"/>
-        </classes>
-    </test>
-
+<suite name="allSuites" verbose="1">
+    <suite-files>
+        <suite-file path="testng.xml"/>
+        <suite-file path="testng1.xml"/>
+    </suite-files>
 </suite>

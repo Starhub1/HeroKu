@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeSuite;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
 
 public class Init {
 
@@ -31,12 +33,16 @@ public class Init {
 
 	public ExtentTest logger;
 	public static ExtentReports report;
-	public static String filepath = "./test-results/" + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
+
+
+	public String filepath;
 
 	@BeforeSuite
-	public void beforesuite(ITestContext ctx) {
+	public void beforesuite(XmlTest test) {
+		Util.setFilePath("test-results/");
+		filepath = Util.getFilePath();
 		report = new ExtentReports(filepath, true);
-		ctx.setAttribute("logger", logger);
+		System.out.println(test.getSuite().getName());
 	}
 
 	@AfterSuite
@@ -55,7 +61,7 @@ public class Init {
 		options.addArguments("–disable-images");
 		// options.addArguments("--headless");
 		driver = new ChromeDriver(options);
-		wait = new WebDriverWait(driver, 20);
+		wait = new WebDriverWait(driver, 30);
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
 	}

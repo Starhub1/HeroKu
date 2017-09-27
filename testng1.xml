@@ -11,6 +11,12 @@
 
         <classes>
             <class name="TestCase.DynamicControls"/>
+            <class name="TestCase.DatePicker"/>
+            <class name="TestCase.MouseHover"/>
+            <class name="TestCase.DragNdrop"/>
+            <class name="TestCase.ContextMenu"/>
+            <class name="TestCase.DropDown"/>
+            <class name="TestCase.CheckBoxes"/>
         </classes>
     </test>
 
