@@ -23,6 +23,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="Screenshots"/>
+	<classpathentry kind="src" path="src/test/Resource"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/selenium-java-3.5.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/selenium-java-3.5"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Maven: org.testng:testng:6.11"/>

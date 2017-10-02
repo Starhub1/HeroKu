@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite2" verbose="1">
+
+    <listeners>
+        <listener class-name="iniitialize.Listener"/>
+    </listeners>
+
+    <test name="Group" preserve-order="true" parallel="classes" thread-count="2">
+    
+	<parameter name="sUserName" value="test"/>
+	<parameter name="sPassword" value="test"/>
+    
+
+        <classes>
+            <class name="TestCase.Login"/>
+        </classes>
+    </test>
+
+</suite>

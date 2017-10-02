@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Suite1]">
+    <test name="Group(failed)" parallel="classes">
+        <classes>
+            <class name="TestCase.ContextMenu">
+                <methods>
+                    <include name="VerifyContextMenu"/>
+                </methods>
+            </class> <!-- TestCase.ContextMenu -->
+            <class name="TestCase.DragNdrop">
+                <methods>
+                    <include name="DragDropVerify"/>
+                </methods>
+            </class> <!-- TestCase.DragNdrop -->
+            <class name="TestCase.CheckBoxes">
+                <methods>
+                    <include name="VerifyCheckBoxLabel"/>
+                </methods>
+            </class> <!-- TestCase.CheckBoxes -->
+            <class name="TestCase.DatePicker">
+                <methods>
+                    <include name="teardown"/>
+                    <include name="setup"/>
+                    <include name="SelectADate"/>
+                </methods>
+            </class> <!-- TestCase.DatePicker -->
+        </classes>
+    </test> <!-- Group(failed) -->
+</suite> <!-- Failed suite [Suite1] -->
