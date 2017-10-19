@@ -87,7 +87,9 @@ public class EventListener extends AbstractWebDriverEventListener {
 	}
 
 	public void beforeClickOn(WebElement ele, WebDriver driver) {
+		System.out.println("Trying to click on the element:" + ele.getText());
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		jse.executeScript("arguments[0].scrollIntoView()", ele);
 		String script = "var ofs = 0;var el = arguments[0];var winInterval = setInterval(function(){el.style.background = 'rgba(255,230,20,'+Math.abs(Math.sin(ofs))+')'; ofs += 0.15;	}, 1);		setTimeout(function(){el.style.background = 'none';clearInterval(winInterval)},300)";
 		jse.executeScript(script, ele);
 	}

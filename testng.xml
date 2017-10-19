@@ -11,7 +11,7 @@
 		thread-count="2">
 
 		<classes>
-			<class name="TestCase.DefectTicket" />
+			<class name="TestCase.TestlinkScript" />
 		</classes>
 	</test>
 
