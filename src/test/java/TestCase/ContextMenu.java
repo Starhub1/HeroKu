@@ -17,6 +17,7 @@ public class ContextMenu extends Init {
 	@Test(description = "This is a sample test to verify the context menu:", testName = "contextMenu Verification")
 	public void VerifyContextMenu() {
 		logger = report.startTest("VerifyContextMenu");
+		test.set(logger);
 		logger.log(LogStatus.INFO, "Verify Context Menu");
 		logger.log(LogStatus.PASS, "Browser Started");
 		driver.get("http://the-internet.herokuapp.com/context_menu");

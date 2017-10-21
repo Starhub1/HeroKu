@@ -20,7 +20,9 @@ public class DropDown extends Init {
 
 	@Test()
 	public void VerifyDropDownValues() {
-        logger = report.startTest("Verify Drop Down Values");
+
+		logger = report.startTest("Verify Drop Down Values");
+		test.set(logger);
 		logger.log(LogStatus.PASS, "Browser Started");
 		driver.get("http://the-internet.herokuapp.com/dropdown");
 		logger.log(LogStatus.PASS, "Successuly navigated to the URL:");
@@ -35,7 +37,8 @@ public class DropDown extends Init {
 
 	@Test(dependsOnMethods = { "VerifyDropDownValues" })
 	public void SelectAvalue() {
-	    logger = report.startTest("Select a value");
+		logger = report.startTest("Select a value");
+		test.set(logger);
 		logger.log(LogStatus.INFO, "Select the vaule 1 from the drop down");
 		dropdown.selectByValue("1");
 		String s = dropdown.getFirstSelectedOption().toString();
@@ -44,16 +47,18 @@ public class DropDown extends Init {
 		logger.log(LogStatus.PASS, "PASSED");
 	}
 
-    @Test(dependsOnMethods = {"methodFailed"})
-    public void methodSkipped() {
-	    logger=report.startTest("This test case will skipped");
-        System.out.println("This method skipped");
-    }
+	@Test(dependsOnMethods = { "methodFailed" })
+	public void methodSkipped() {
+		logger = report.startTest("This test case will skipped");
+		test.set(logger);
+		System.out.println("This method skipped");
+	}
 
-    @Test(alwaysRun = true)
-    public void methodFailed() {
-	    logger = report.startTest("This testcase will failed");
-        Assert.assertTrue(false);
+	@Test(alwaysRun = true)
+	public void methodFailed() {
+		logger = report.startTest("This testcase will failed");
+		test.set(logger);
+		Assert.assertTrue(false);
 	}
 
 }

@@ -10,9 +10,11 @@ import org.testng.annotations.BeforeMethod;
 
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
 
 public class EventListener extends AbstractWebDriverEventListener {
 	ExtentTest test;
+	ExtentTest logger;
 	ExtentReports report = Init.report;
 	private WebDriver webDriver;
 
@@ -39,10 +41,14 @@ public class EventListener extends AbstractWebDriverEventListener {
 	}
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
+		logger = Init.getLogger();
+		logger.log(LogStatus.PASS, "Before navigating to: " + url);
 		System.out.println("Before navigating to: '" + url + "'");
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
+		logger = Init.getLogger();
+		logger.log(LogStatus.PASS, "Successfully  navigated  to the url: " + url);
 		System.out.println("Navigated to:'" + url + "'");
 
 	}

@@ -27,19 +27,24 @@ public class Init {
 	public WebDriverWait wait;
 	ChromeOptions options;
 	public EventFiringWebDriver driver;
+	public static ExtentReports report;
+	public String filepath;
+	public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+	public ExtentTest logger;
 
 	public WebDriver getDriver() {
 		return driver;
 	}
 
-	public ExtentTest getLogger() {
-		return logger;
+	public static ExtentTest getLogger() {
+		return test.get();
 	}
 
-	public ExtentTest logger;
-	public static ExtentReports report;
-
-	public String filepath;
+	public ExtentTest getLogger(String testcaseName) {
+		logger = report.startTest("Verify Drag and drop functionality");
+		test.set(logger);
+		return test.get();
+	}
 
 	@BeforeSuite
 	public void beforesuite(XmlTest test) {
@@ -51,9 +56,9 @@ public class Init {
 
 	@AfterSuite
 	public void aftersuite() {
-		report.endTest(logger);
+		report.endTest(test.get());
 		report.flush();
-		// driver.quit();
+		driver.quit();
 	}
 
 	@BeforeClass
@@ -87,7 +92,8 @@ public class Init {
 
 	@AfterClass
 	public void tearDown() {
-		// driver.quit();
+		test.remove();
+		driver.quit();
 	}
 
 }
