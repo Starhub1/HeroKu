@@ -34,7 +34,7 @@ public class MouseHover extends Init {
 		}
 
 		logger.log(LogStatus.PASS, "Passed");
-		test.remove();
+		//test.remove();
 	}
 
 	@Test(dependsOnMethods = { "verifyMouseHover" })
