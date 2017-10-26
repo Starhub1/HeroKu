@@ -1,20 +1,16 @@
 package iniitialize;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.xml.XmlTest;
 
@@ -31,9 +27,12 @@ public class Init {
 	public String filepath;
 	public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
 	public ExtentTest logger;
+	private static List<WebDriverThread> webDriverThreadPool = Collections
+			.synchronizedList(new ArrayList<WebDriverThread>());
+	private static ThreadLocal<WebDriverThread> driverThread;
 
-	public WebDriver getDriver() {
-		return driver;
+	public static EventFiringWebDriver getDriver() throws Exception {
+		return driverThread.get().getDriver();
 	}
 
 	public static ExtentTest getLogger() {
@@ -48,6 +47,15 @@ public class Init {
 
 	@BeforeSuite
 	public void beforesuite(XmlTest test) {
+		driverThread = new ThreadLocal<WebDriverThread>() {
+			@Override
+			protected WebDriverThread initialValue() {
+				WebDriverThread webDriverThread = new WebDriverThread();
+				webDriverThreadPool.add(webDriverThread);
+				return webDriverThread;
+			}
+		};
+
 		Util.setFilePath("test-results/");
 		filepath = Util.getFilePath();
 		report = new ExtentReports(filepath, true);
@@ -58,42 +66,23 @@ public class Init {
 	public void aftersuite() {
 		report.endTest(test.get());
 		report.flush();
-		driver.quit();
-	}
-
-	@BeforeClass
-	public void setup() {
-		InputStream is = Init.class.getResourceAsStream("/chromedriver_win32/chromedriver.exe");
-		String path = System.getProperty("java.io.tmpdir") + "chromedriver.exe";
-		Path temdir = Paths.get(path);
-		if (java.nio.file.Files.notExists(temdir)) {
-			try {
-				java.nio.file.Files.copy(is, temdir, StandardCopyOption.REPLACE_EXISTING);
-			} catch (IOException e) {
-				e.printStackTrace();
-				e.getMessage();
-			}
+		for (WebDriverThread webDriverThread : webDriverThreadPool) {
+			webDriverThread.quitDriver();
 		}
-		System.setProperty("webdriver.chrome.driver", temdir.toString());
-		options = new ChromeOptions();
-		options.addArguments("start-maximized");
-		options.addArguments("incognito");
-		options.addArguments("–disable-images");
-		// options.addArguments("--headless");
-		dr = new ChromeDriver(options);
-		wait = new WebDriverWait(dr, 30);
-		dr.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-		dr.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
-		EventListener eventListener = new EventListener();
-		driver = new EventFiringWebDriver(dr);
-		driver.register(eventListener);
-
+		// driver.quit();
 	}
 
-	@AfterClass
-	public void tearDown() {
-		test.remove();
-		driver.quit();
+	@BeforeMethod
+	public void setup() throws Exception {
+		driver = getDriver();
+		wait = new WebDriverWait(driver, 30);
+	}
+
+	@AfterMethod
+	public void tearDown() throws Exception {
+		// test.remove();
+		// driver.quit();
+		getDriver().manage().deleteAllCookies();
 	}
 
 }
