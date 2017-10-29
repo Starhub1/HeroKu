@@ -1,39 +1,60 @@
 package TestCase;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.testng.Assert;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
+
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import iniitialize.Init;
+import Pages.ContextMenuPage;
+import Initialize.Init;
 
 public class ContextMenu extends Init {
 
-	@Test(description = "This is a sample test to verify the context menu:", testName = "contextMenu Verification")
-	public void VerifyContextMenu() {
-		logger = report.startTest("VerifyContextMenu");
+	@Test()
+	public void VerifyContextMenuFunctionality() throws Exception {
+		logger = report.startTest("Verify ContextMenu Functionality");
+		test.set(logger);		
+		
+		getDriver().get("http://the-internet.herokuapp.com/context_menu");
+		ContextMenuPage ContextMenuPage =  new ContextMenuPage(getDriver());
+		
+		logger.log(LogStatus.INFO, "Verify Right Click");
+		ContextMenuPage.performRightClick();
+		logger.log(LogStatus.PASS, "Right Click performed successfuly");
+		
+		logger.log(LogStatus.INFO, "Switch to Alert");
+		assertTrue(ContextMenuPage.IsAlertPresent());
+		ContextMenuPage.switchToAlert();
+		logger.log(LogStatus.PASS, "Successfuly Switched to Alert");
+		
+		logger.log(LogStatus.INFO, "Verify the text on the Alert");
+		assertEquals("You selected a context menu", ContextMenuPage.getAlertText());
+		logger.log(LogStatus.PASS, "Text in the Alert is : " + ContextMenuPage.getAlertText());
+		
+		logger.log(LogStatus.INFO, "Verify Clicking Ok on the Alert");
+		ContextMenuPage.AcceptAlert();
+		assertFalse(ContextMenuPage.IsAlertPresent());
+		logger.log(LogStatus.PASS, "Alert Closed successfully");
+	}
+	
+	
+
+	@Test()
+	public void verifyheaderoftheContextMenuPage() throws Exception {
+		logger = report.startTest("Verigy the header of the context Menu page.");
 		test.set(logger);
-		logger.log(LogStatus.INFO, "Verify Context Menu");
-		logger.log(LogStatus.PASS, "Browser Started");
-		driver.get("http://the-internet.herokuapp.com/context_menu");
-		WebElement el = driver.findElement(By.id("hot-spot"));
-		logger.log(LogStatus.PASS, "search the element to click");
-		el.click();
-		Actions a = new Actions(driver);
-		a.contextClick(el).sendKeys(Keys.ARROW_DOWN);
-		a.contextClick(el).sendKeys(Keys.ARROW_DOWN);
-		a.contextClick(el).sendKeys(Keys.ARROW_DOWN);
-		a.contextClick(el).sendKeys(Keys.ARROW_DOWN);
-		a.contextClick(el).sendKeys(Keys.ENTER).perform();
-		logger.log(LogStatus.PASS, "Perform context click");
-		Alert al = driver.switchTo().alert();
-		System.out.println(al.getText());
-		Assert.assertTrue(al.getText().contains("You selected a context menu"));
+		
+		getDriver().get("http://the-internet.herokuapp.com/context_menu");
+		ContextMenuPage ContextMenuPage =  new ContextMenuPage(getDriver());
+		
+		logger.log(LogStatus.INFO, "Verify Header of the Page");
+		String header = ContextMenuPage.getheaderofthePage();
+		assertEquals(header, "Context Menu");
+		logger.log(LogStatus.PASS, "Header of the Page is "+ header);
+		
 	}
 
 }

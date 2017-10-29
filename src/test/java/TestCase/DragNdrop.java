@@ -1,37 +1,48 @@
 package TestCase;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import static org.testng.Assert.assertEquals;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import iniitialize.Init;
+import Pages.DragNDropPage;
+import Initialize.Init;
 
 public class DragNdrop extends Init {
-	WebElement src, dst;
-	Actions a;
 
 	@Test(expectedExceptions = {})
-	public void DragDropVerify() {
+	public void VerifyDragNDropFunctionality() throws Exception {
+		
 		logger = report.startTest("Verify Drag and drop functionality");
 		test.set(logger);
-		driver.get("http://the-internet.herokuapp.com/drag_and_drop");
-		wait = new WebDriverWait(driver, 30);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("column-b")));
-		src = driver.findElement(By.id("column-a"));
-		System.out.println(src.getText());
-		dst = driver.findElement(By.id("column-b"));
-		System.out.println(dst.getText());
-		logger.log(LogStatus.PASS, "Get the Text", dst.getText());
-		a = new Actions(driver);
-		// a.dragAndDrop(src,dst).build().perform();
-		a.clickAndHold(src).moveToElement(dst).release(src).build().perform();
-		String actualText = driver.findElement(By.cssSelector("#column-a>header")).getText();
-		Assert.assertEquals(actualText, "A");
+		
+		getDriver().get("http://the-internet.herokuapp.com/drag_and_drop");
+		DragNDropPage DragNDropPage = new DragNDropPage();
+		
+		logger.log(LogStatus.INFO, "Verif Drag and Drop Functionality");
+		DragNDropPage.dragtoDestination();
+		Assert.assertEquals(DragNDropPage.getSrcText(), "B");
+		Assert.assertEquals(DragNDropPage.getDestText(), "A");
+		
+		logger.log(LogStatus.PASS, "Successfuly drag the element to the destination.");
 	}
+	
+	@Test()
+	public void verifyheaderoftheDragNDropPage() throws Exception {
+		logger = report.startTest("Verify header of the Drag and Drop Page");
+		test.set(logger);
+		
+		getDriver().get("http://the-internet.herokuapp.com/drag_and_drop");
+		DragNDropPage DragNDropPage = new DragNDropPage();
+		
+		logger.log(LogStatus.INFO, "Verify Header of the Page");
+		String header = DragNDropPage.getHeader();
+		assertEquals(header, "Drag and Drop");
+		logger.log(LogStatus.PASS, "Header of the Page is "+ header);
+		
+	}
+
+
 }

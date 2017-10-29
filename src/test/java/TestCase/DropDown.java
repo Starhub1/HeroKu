@@ -1,64 +1,78 @@
 package TestCase;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.Arrays;
 import java.util.List;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
 
-import iniitialize.Init;
+import Pages.DropDownPage;
+import Initialize.Init;
 
 public class DropDown extends Init {
 
-	Select dropdown;
-	List<WebElement> options;
+	List<String> expectedvalues = Arrays.asList("Please select an option","Option 1","Option 2");
 
 	@Test()
-	public void VerifyDropDownValues() {
-
-		logger = report.startTest("Verify Drop Down Values");
+	public void VerifyDropDownValues() throws Exception {
+		
+		logger = report.startTest("Verify Drop Down Values in the Drop Down Page");
 		test.set(logger);
-		logger.log(LogStatus.PASS, "Browser Started");
-		driver.get("http://the-internet.herokuapp.com/dropdown");
-		logger.log(LogStatus.PASS, "Successuly navigated to the URL:");
-		dropdown = new Select(driver.findElement(By.id("dropdown")));
-		logger.log(LogStatus.PASS, "Search element suceess");
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id("dropdown")));
-		options = dropdown.getOptions();
-		for (WebElement o : options)
-			System.out.println(o.getText());
+		
+		getDriver().get("http://the-internet.herokuapp.com/dropdown");
+		DropDownPage DropdownPage = new DropDownPage();
+		
+		logger.log(LogStatus.INFO, "Verify all the options in the drop down");
+		List <String> actualvalues = DropdownPage.getAlltheValuesfromtheDropdown();
+		assertEquals(actualvalues, expectedvalues);
+
+		logger.log(LogStatus.PASS, "All the options are as expected "+ actualvalues);
+
+
 
 	}
 
 	@Test(dependsOnMethods = { "VerifyDropDownValues" })
-	public void SelectAvalue() {
-		logger = report.startTest("Select a value");
+	public void SelectAvaluefromtheDropDown() throws Exception {
+		
+		logger = report.startTest("Select a value from the Drop Down");
 		test.set(logger);
-		logger.log(LogStatus.INFO, "Select the vaule 1 from the drop down");
-		dropdown.selectByValue("1");
-		String s = dropdown.getFirstSelectedOption().toString();
-		logger.log(LogStatus.PASS, "Verify the selected value");
-		System.out.println("This is the select value " + s);
-		logger.log(LogStatus.PASS, "PASSED");
+		
+		getDriver().get("http://the-internet.herokuapp.com/dropdown");
+		DropDownPage DropdownPage = new DropDownPage();
+		
+		logger.log(LogStatus.INFO, "Verify Select the value 1 from the drop down");
+		DropdownPage.SelectAValuefromTheDropDown(1);
+		assertEquals(DropdownPage.getSelectedValDropDown(), "Option 1");
+		logger.log(LogStatus.PASS, "The Selected value in the drop down is " + DropdownPage.getSelectedValDropDown());
+		
+		
 	}
 
 	@Test(dependsOnMethods = { "methodFailed" })
-	public void methodSkipped() {
+	public void methodSkipped() throws Exception {
 		logger = report.startTest("This test case will skipped");
 		test.set(logger);
+		
+		getDriver().get("http://the-internet.herokuapp.com/dropdown");
+		
 		System.out.println("This method skipped");
 	}
 
 	@Test(alwaysRun = true)
-	public void methodFailed() {
+	public void methodFailed() throws Exception {
 		logger = report.startTest("This testcase will failed");
 		test.set(logger);
+		
+		getDriver().get("http://the-internet.herokuapp.com/dropdown");
 		Assert.assertTrue(false);
+		
+		
+		
 	}
 
 }
