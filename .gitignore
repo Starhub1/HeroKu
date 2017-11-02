@@ -22,6 +22,8 @@ target
 test-output
 testreport
 test-results
+.allure
+allure-results
 
 
 # Logs and databases #

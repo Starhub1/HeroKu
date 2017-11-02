@@ -2,7 +2,9 @@ package Pages;
 
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.security.Key;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -34,25 +36,12 @@ public class ContextMenuPage {
 	public void performRightClick() throws Exception {
 		action = new Actions(Init.getDriver());
 		action.contextClick(ctxBox).perform();
-		Robot r = new Robot();
-		r.keyPress(KeyEvent.VK_DOWN);
-		r.keyRelease(KeyEvent.VK_DOWN);
-		
-
-		r.keyPress(KeyEvent.VK_DOWN);
-		r.keyRelease(KeyEvent.VK_DOWN);
-		
-		r.keyPress(KeyEvent.VK_DOWN);
-		r.keyRelease(KeyEvent.VK_DOWN);
-
-		r.keyPress(KeyEvent.VK_DOWN);
-		r.keyRelease(KeyEvent.VK_DOWN);
-
-		r.keyPress(KeyEvent.VK_DOWN);
-		r.keyRelease(KeyEvent.VK_DOWN);
-
-		r.keyPress(KeyEvent.VK_ENTER);
-		r.keyRelease(KeyEvent.VK_ENTER);
+		action.sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ARROW_DOWN)
+				.sendKeys(Keys.ENTER).perform();
 		
 
 	}

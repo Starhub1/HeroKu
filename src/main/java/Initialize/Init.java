@@ -64,24 +64,15 @@ public class Init {
 
 	@AfterSuite
 	public void aftersuite() {
-		report.endTest(test.get());
-		report.flush();
 		for (WebDriverThread webDriverThread : webDriverThreadPool) {
 			webDriverThread.quitDriver();
 		}
-		// driver.quit();
 	}
 
-	@BeforeMethod
-	public void setup() throws Exception {
-		driver = getDriver();
-		wait = new WebDriverWait(driver, 30);
-	}
+
 
 	@AfterMethod
 	public void tearDown() throws Exception {
-		// test.remove();
-		// driver.quit();
 		getDriver().manage().deleteAllCookies();
 	}
 

@@ -18,7 +18,7 @@ public class CheckBoxes extends Init {
 	
 	CheckboxPage CheckboxPage;
 	List<WebElement> checkboxes;
-	
+
 	
 	@Test()
 	public void VerifyCheckBoxFunctionality() throws Exception {

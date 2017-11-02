@@ -4,7 +4,6 @@ import static Initialize.DriverType.valueOf;
 
 import java.net.MalformedURLException;
 
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class WebDriverThread {
@@ -19,8 +18,7 @@ public class WebDriverThread {
 	public EventFiringWebDriver getDriver() throws Exception {
 		if (null == webdriver) {
 			selectedDriverType = determineEffectiveDriverType();
-			DesiredCapabilities desiredCapabilities = selectedDriverType.getDesiredCapabilities();
-			instantiateWebDriver(desiredCapabilities);
+			instantiateWebDriver();
 		}
 
 		return webdriver;
@@ -44,13 +42,13 @@ public class WebDriverThread {
 		return driverType;
 	}
 
-	private void instantiateWebDriver(DesiredCapabilities desiredCapabilities) throws MalformedURLException {
+	private void instantiateWebDriver() throws MalformedURLException {
 		System.out.println(" ");
 		System.out.println("Current Operating System: " + operatingSystem);
 		System.out.println("Current Architecture: " + systemArchitecture);
 		System.out.println("Current Browser Selection: " + selectedDriverType);
 		System.out.println(" ");
-		webdriver = selectedDriverType.getWebDriverObject(desiredCapabilities);
+		webdriver = selectedDriverType.getWebDriverObject();
 	}
 
 }

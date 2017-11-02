@@ -3,6 +3,7 @@ package Initialize;
 import java.io.File;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -13,7 +14,7 @@ import com.relevantcodes.extentreports.LogStatus;
 public class Listener implements ITestListener {
 
 	public ExtentTest test;
-	WebDriver driver;
+	EventFiringWebDriver driver;
 
 	@Override
 	public void onTestStart(ITestResult res) {
@@ -24,6 +25,8 @@ public class Listener implements ITestListener {
 	public void onTestSuccess(ITestResult res) {
 		ExtentTest test = Init.getLogger();
 		test.log(LogStatus.PASS,  "PASS");
+		Init.report.endTest(Init.getLogger());
+		Init.report.flush();
 	}
 
 	@Override
@@ -49,6 +52,9 @@ public class Listener implements ITestListener {
 			test.log(LogStatus.FAIL, res.getName(), "Screenshot" + test.addScreenCapture(image));
 			test.log(LogStatus.FAIL, res.getThrowable());
 		}
+
+		Init.report.endTest(Init.getLogger());
+		Init.report.flush();
 	}
 
 	@Override
@@ -63,6 +69,8 @@ public class Listener implements ITestListener {
 			test.log(LogStatus.SKIP, res.getName());
 			test.log(LogStatus.SKIP, res.getThrowable());
 		}
+		Init.report.endTest(Init.getLogger());
+		Init.report.flush();
 
 	}
 

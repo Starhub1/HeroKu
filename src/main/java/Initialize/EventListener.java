@@ -18,12 +18,6 @@ public class EventListener extends AbstractWebDriverEventListener {
 	ExtentReports report = Init.report;
 	private WebDriver webDriver;
 
-	@BeforeMethod
-	public void beforemethod(ITestResult res) {
-		Object currentClass = res.getInstance();
-		test = ((Init) currentClass).getLogger();
-	}
-
 	public void beforeAlertAccept(WebDriver driver) {
 
 	}
@@ -41,15 +35,15 @@ public class EventListener extends AbstractWebDriverEventListener {
 	}
 
 	public void beforeNavigateTo(String url, WebDriver driver) {
-		logger = Init.getLogger();
+		/*logger = Init.getLogger();
 		logger.log(LogStatus.PASS, "Before navigating to: " + url);
-		System.out.println("Before navigating to: '" + url + "'");
+		System.out.println("Before navigating to: '" + url + "'");*/
 	}
 
 	public void afterNavigateTo(String url, WebDriver driver) {
-		logger = Init.getLogger();
+		/*logger = Init.getLogger();
 		logger.log(LogStatus.PASS, "Successfully  navigated  to the url: " + url);
-		System.out.println("Navigated to:'" + url + "'");
+		System.out.println("Navigated to:'" + url + "'");*/
 
 	}
 

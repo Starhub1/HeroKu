@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite1" verbose="1">
+<suite name="Suite1" verbose="3">
 
     <listeners>
         <listener class-name="Initialize.Listener"/>
@@ -7,17 +7,12 @@
     </listeners>
 
 
-    <test name="Group" preserve-order="true" parallel="classes" thread-count="3">
+    <test name="Group" preserve-order="false" parallel="instances" thread-count="3">
 
-        <classes>
-            <class name="TestCase.DynamicControls"/>
-            <class name="TestCase.DatePicker"/>
-            <class name="TestCase.MouseHover"/>
-            <class name="TestCase.DragNdrop"/>
-            <class name="TestCase.ContextMenu"/>
-            <class name="TestCase.DropDown"/>
-            <class name="TestCase.CheckBoxes"/>
-        </classes>
+        <packages>
+            <package name="TestCase.*"/>
+        </packages>
+
     </test>
 
 </suite>
