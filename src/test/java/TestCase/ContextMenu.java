@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -15,9 +16,8 @@ public class ContextMenu extends Init {
 
 	@Test()
 	public void VerifyContextMenuFunctionality() throws Exception {
-		logger = report.startTest("Verify ContextMenu Functionality");
-		test.set(logger);		
-		
+		ExtentTest logger = setLogger("Verify ContextMenu Functionality").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://the-internet.herokuapp.com/context_menu");
 		ContextMenuPage ContextMenuPage =  new ContextMenuPage(getDriver());
 		
@@ -44,9 +44,8 @@ public class ContextMenu extends Init {
 
 	@Test()
 	public void verifyheaderoftheContextMenuPage() throws Exception {
-		logger = report.startTest("Verigy the header of the context Menu page.");
-		test.set(logger);
-		
+		ExtentTest logger = setLogger("Verigy the header of the context Menu page.").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://the-internet.herokuapp.com/context_menu");
 		ContextMenuPage ContextMenuPage =  new ContextMenuPage(getDriver());
 		

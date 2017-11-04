@@ -6,6 +6,8 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
+import com.relevantcodes.extentreports.ExtentTest;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
@@ -22,9 +24,8 @@ public class CheckBoxes extends Init {
 	
 	@Test()
 	public void VerifyCheckBoxFunctionality() throws Exception {
-		logger = report.startTest("Verify Checkbox functionality");
-		test.set(logger);
-		
+		ExtentTest logger = setLogger("Verify Checkbox functionality").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://the-internet.herokuapp.com/checkboxes");
 		CheckboxPage = new CheckboxPage(getDriver());
 		
@@ -39,12 +40,12 @@ public class CheckBoxes extends Init {
 		logger.log(LogStatus.PASS,"Option 1 De-Selected Succesfully");
 	}
 
+	@Step("Verify the {0}  page")
 	@Test()
 	public void VerifyheaderoftheCheckboxPage() throws Exception {
-		
-		logger = report.startTest("Verify Header of the Checkbox Page");
-		test.set(logger);
-		
+
+		ExtentTest logger = setLogger("Verify Header of the Checkbox Page").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://the-internet.herokuapp.com/checkboxes");
 		CheckboxPage = new CheckboxPage(getDriver());
 		

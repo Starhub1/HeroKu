@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -15,12 +16,11 @@ public class DynamicControls extends Init {
 
 	@Test
 	public void dynamicControltestRemovingCheckbox() throws Exception {
-		logger = report.startTest("Verify Dynamic control functionality -Removing the checkbox");
-		test.set(logger);
+		ExtentTest logger = setLogger("Verify Dynamic control functionality -Removing the checkbox");
 
 
 		getDriver().get("http://the-internet.herokuapp.com/dynamic_controls");
-		DynamicControlPage dynamicControlPage = new DynamicControlPage();
+		DynamicControlPage dynamicControlPage = new DynamicControlPage(getDriver());
 
 		logger.log(LogStatus.INFO,"Verify Removing the checkbox");
 		dynamicControlPage.removetheCheckbox();
@@ -31,12 +31,11 @@ public class DynamicControls extends Init {
 
 	}
 
-	@Test(dependsOnMethods = {"dynamicControltestRemovingCheckbox"})
+	@Test()
 	public void dynamicControltestAddingTheCheckox() throws Exception {
-		logger = report.startTest("Verify Dynamic control functionality -Adding the checkbox");
-		test.set(logger);
+		ExtentTest logger = setLogger("Verify Dynamic control functionality -Adding the checkbox");
 
-		DynamicControlPage dynamicControlPage = new DynamicControlPage();
+		DynamicControlPage dynamicControlPage = new DynamicControlPage(getDriver());
 		getDriver().get("http://the-internet.herokuapp.com/dynamic_controls");
 		dynamicControlPage.removetheCheckbox();
 

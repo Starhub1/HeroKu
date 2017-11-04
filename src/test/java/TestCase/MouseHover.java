@@ -2,7 +2,7 @@ package TestCase;
 
 import static org.testng.Assert.assertEquals;
 
-import org.openqa.selenium.interactions.Actions;
+import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -15,11 +15,10 @@ public class MouseHover extends Init {
 	@Test
 	public void verifyMouseHoverFunctionality() throws Exception {
 
-		logger = report.startTest("Verify Mouse Hover Functionality ");
-		test.set(logger);
+		ExtentTest logger = setLogger("Verify Mouse Hover Functionality ");
 
 		getDriver().get("http://the-internet.herokuapp.com/hovers");
-		MousehoverPage mouseHoverOnUserImage = new MousehoverPage();
+		MousehoverPage mouseHoverOnUserImage = new MousehoverPage(getDriver());
 
 		logger.log(LogStatus.INFO,"Verify On Mouse Hover of User 1");
 		mouseHoverOnUserImage.mouseHoverOnUserImage(1);
@@ -30,14 +29,13 @@ public class MouseHover extends Init {
 
 	}
 
-	@Test(dependsOnMethods ="verifyMouseHoverFunctionality")
+	@Test()
 	public void verifyViewProfileLinkFunctionality() throws Exception {
 
-		logger = report.startTest("Verify ViewProfile Link Functionality");
-		test.set(logger);
+		ExtentTest logger = setLogger("Verify ViewProfile Link Functionality");
 
 		getDriver().get("http://the-internet.herokuapp.com/hovers");
-		MousehoverPage hoverPg = new MousehoverPage();
+		MousehoverPage hoverPg = new MousehoverPage(getDriver());
 
 		logger.log(LogStatus.INFO,"Verify Clicking View Profile Link of the User 2");
 		hoverPg.clickOnViewProfileLinkoftheUser(2);

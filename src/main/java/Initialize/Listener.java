@@ -13,28 +13,25 @@ import com.relevantcodes.extentreports.LogStatus;
 
 public class Listener implements ITestListener {
 
-	public ExtentTest test;
-	EventFiringWebDriver driver;
 
 	@Override
 	public void onTestStart(ITestResult res) {
-		test = (ExtentTest) res.getAttribute("logger");
 	}
 
 	@Override
 	public void onTestSuccess(ITestResult res) {
 		ExtentTest test = Init.getLogger();
 		test.log(LogStatus.PASS,  "PASS");
-		Init.report.endTest(Init.getLogger());
-		Init.report.flush();
+		Init.endTest();
 	}
 
 	@Override
 	public void onTestFailure(ITestResult res) {
+		EventFiringWebDriver driver=null;
 		String image = null;
 		System.out.println(res.getMethod().getDescription());
 		try {
-			driver = Init.getDriver();
+			driver = ((Init) res.getInstance()).getDriver();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -53,24 +50,23 @@ public class Listener implements ITestListener {
 			test.log(LogStatus.FAIL, res.getThrowable());
 		}
 
-		Init.report.endTest(Init.getLogger());
-		Init.report.flush();
+		Init.endTest();
 	}
 
 	@Override
 	public void onTestSkipped(ITestResult res) {
+		EventFiringWebDriver driver = null;
 		try {
-			driver = Init.getDriver();
+			driver = ((Init) res.getInstance()).getDriver();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		test = Init.report.startTest(res.getName());
+		ExtentTest test = Init.report.startTest(res.getName());
 		if (driver != null) {
 			test.log(LogStatus.SKIP, res.getName());
 			test.log(LogStatus.SKIP, res.getThrowable());
 		}
-		Init.report.endTest(Init.getLogger());
-		Init.report.flush();
+		Init.endTest();
 
 	}
 

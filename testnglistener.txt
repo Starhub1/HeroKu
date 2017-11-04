@@ -101,3 +101,16 @@ public void beforeAlertAccept(WebDriver driver) {
         System.out.println("Error occurred: " + error);
         test.log(LogStatus.FATAL,"Error occured");
     }
+	
+	InputStream is = Init.class
+                    .getResourceAsStream("/phantomjs-2.1.1-windows/phantomjs-2.1.1-windows/bin/phantomjs.exe");
+            String path = System.getProperty("java.io.tmpdir") + "phantomjs.exe";
+            Path temdir = Paths.get(path);
+            if (java.nio.file.Files.notExists(temdir)) {
+                try {
+                    java.nio.file.Files.copy(is, temdir, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    e.getMessage();
+                }
+            }

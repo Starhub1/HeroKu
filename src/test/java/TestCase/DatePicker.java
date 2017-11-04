@@ -2,6 +2,7 @@ package TestCase;
 
 import static org.testng.Assert.assertEquals;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.annotations.Test;
 
 import com.relevantcodes.extentreports.LogStatus;
@@ -15,11 +16,10 @@ public class DatePicker extends Init {
 
 	@Test()
 	public void VerifySelectADate() throws Exception {
-		logger = report.startTest("Select JQuery Date");
-		test.set(logger);
-		
+		ExtentTest logger = Init.setLogger("Select JQuery Date").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://jqueryui.com/datepicker/");
-		datePickerLocator = new DatePickerPage();
+		datePickerLocator = new DatePickerPage(getDriver());
 		
 		logger.log(LogStatus.INFO, "Verify Entering a date 08/15/2018 in the date Field");
 		datePickerLocator.selectAdateintheDateFieled("08/15/2018");
@@ -29,11 +29,10 @@ public class DatePicker extends Init {
 	
 	@Test()
 	public void verifyheaderoftheDatePickerPage() throws Exception {
-		logger = report.startTest("Verify header of the Date Picker Page.");
-		test.set(logger);
-		
+		ExtentTest logger = setLogger("Verify header of the Date Picker Page.").assignAuthor("Mohammed Nasir").assignCategory("Category Regression");
+
 		getDriver().get("http://jqueryui.com/datepicker/");
-		datePickerLocator = new DatePickerPage();
+		datePickerLocator = new DatePickerPage(getDriver());
 		
 		logger.log(LogStatus.INFO, "Verify Header of the Page");
 		String header = datePickerLocator.getPageheader();

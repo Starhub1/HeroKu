@@ -13,12 +13,12 @@ public class CheckboxPage {
 	}
 
 	@FindBy(css = "h3")
-	private static WebElement header;
+	private  WebElement header;
 
 	@FindBy(xpath = "//input[@type='checkbox']")
-	private static List<WebElement> checkboxes;
+	private  List<WebElement> checkboxes;
 
-	public static String getTitle(EventFiringWebDriver driver) {
+	public  String getTitle(EventFiringWebDriver driver) {
 		return driver.getTitle();
 	}
 

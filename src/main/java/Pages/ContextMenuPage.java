@@ -17,24 +17,26 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import Initialize.Init;
 
 public class ContextMenuPage {
+	EventFiringWebDriver driver;
 
 	public ContextMenuPage(EventFiringWebDriver driver) {
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 
 	Actions action;
 	@FindBy(id = "hot-spot")
-	private static WebElement ctxBox;
+	private  WebElement ctxBox;
 
 	@FindBy(css = "h3")
-	private static WebElement header;
+	private WebElement header;
 
 	public String getHeader() {
 		return header.getText();
 	}
 
 	public void performRightClick() throws Exception {
-		action = new Actions(Init.getDriver());
+		action = new Actions(driver);
 		action.contextClick(ctxBox).perform();
 		action.sendKeys(Keys.ARROW_DOWN)
 				.sendKeys(Keys.ARROW_DOWN)
@@ -47,22 +49,22 @@ public class ContextMenuPage {
 	}
 
 	public void switchToAlert() throws Exception {
-		new WebDriverWait(Init.getDriver(), 5).
+		new WebDriverWait(driver, 5).
 		until(ExpectedConditions.alertIsPresent());
-		Init.getDriver().switchTo().alert();
+		driver.switchTo().alert();
 	}
 
 	public String getAlertText() throws Exception {
-		return Init.getDriver().switchTo().alert().getText();
+		return driver.switchTo().alert().getText();
 	}
 
 	public void AcceptAlert() throws Exception {
-		Init.getDriver().switchTo().alert().accept();
+		driver.switchTo().alert().accept();
 	}
 
 	public boolean IsAlertPresent() throws Exception {
 		try {
-			Init.getDriver().switchTo().alert();
+			driver.switchTo().alert();
 			return true;
 		} catch (NoAlertPresentException nl) {
 			return false;

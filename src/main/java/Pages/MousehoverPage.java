@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -15,9 +16,10 @@ import java.util.List;
 import static org.testng.Assert.assertEquals;
 
 public class MousehoverPage {
-
-    public MousehoverPage() throws Exception {
-        PageFactory.initElements(Init.getDriver(),this);
+    EventFiringWebDriver driver ;
+    public MousehoverPage(EventFiringWebDriver driver) throws Exception {
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
     }
 
     @FindBy(xpath = "//div[@class='figure']/img")
@@ -35,7 +37,7 @@ public class MousehoverPage {
     private WebElement txtHeader;
 
     public void mouseHoverOnUserImage (int index) throws Exception {
-        Actions a = new Actions(Init.getDriver());
+        Actions a = new Actions(driver);
             a.moveToElement(imguser.get(index-1)).build().perform();
     }
 
@@ -53,9 +55,9 @@ public class MousehoverPage {
     }
 
     public String getheaderoftheProfilePage() throws Exception {
-        new WebDriverWait(Init.getDriver(),10   ).until(ExpectedConditions.visibilityOf(txtHeader));
+        new WebDriverWait(driver,10   ).until(ExpectedConditions.visibilityOf(txtHeader));
         String header = txtHeader.getText();
-        Init.getDriver().navigate().back();
+        driver.navigate().back();
         return header;
     }
 

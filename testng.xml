@@ -11,7 +11,7 @@
 		thread-count="1">
 
 		<classes>
-			<class name="TestCase.MouseHover"/>
+			<class name="TestCase.CheckBoxes"/>
 		</classes>
 	</test>
 

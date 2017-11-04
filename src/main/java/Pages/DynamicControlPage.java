@@ -4,33 +4,35 @@ import Initialize.Init;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class DynamicControlPage {
-
-    public DynamicControlPage() throws Exception {
-        PageFactory.initElements(Init.getDriver(),this);
+    EventFiringWebDriver driver;
+    public DynamicControlPage(EventFiringWebDriver driver) throws Exception {
+        this.driver=driver;
+        PageFactory.initElements(driver,this);
     }
 
     @FindBy(css = "h4")
-    public static WebElement lblheader;
+    public  WebElement lblheader;
 
     @FindBy(id = "btn")
-    public static WebElement btnAddRemove;
+    public  WebElement btnAddRemove;
 
     @FindBy(id="message")
-    public static WebElement lblMessage;
+    public  WebElement lblMessage;
 
     @FindBy(id="checkbox")
-    public static List <WebElement> chkCheckbox;
+    public  List <WebElement> chkCheckbox;
 
 
     public void removetheCheckbox() throws Exception {
         btnAddRemove.click();
-        new WebDriverWait(Init.getDriver(),10).until(ExpectedConditions.textToBePresentInElement(lblMessage, "It's gone!"));
+        new WebDriverWait(driver,10).until(ExpectedConditions.textToBePresentInElement(lblMessage, "It's gone!"));
 
     }
 
@@ -44,6 +46,6 @@ public class DynamicControlPage {
 
     public void addTheCheckboxagain() throws Exception {
         btnAddRemove.click();
-        new WebDriverWait(Init.getDriver(),10).until(ExpectedConditions.textToBePresentInElement(lblMessage, "It's back!"));
+        new WebDriverWait(driver,10).until(ExpectedConditions.textToBePresentInElement(lblMessage, "It's back!"));
     }
 }

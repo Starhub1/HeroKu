@@ -1,5 +1,5 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite1" verbose="3">
+<suite name="Suite1" verbose="2">
 
     <listeners>
         <listener class-name="Initialize.Listener"/>
@@ -7,7 +7,7 @@
     </listeners>
 
 
-    <test name="Group" preserve-order="false" parallel="instances" thread-count="3">
+    <test name="Group" preserve-order="true" parallel="classes" thread-count="3">
 
         <packages>
             <package name="TestCase.*"/>

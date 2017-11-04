@@ -5,6 +5,7 @@ import static org.testng.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
+import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -19,12 +20,11 @@ public class DropDown extends Init {
 
 	@Test()
 	public void VerifyDropDownValues() throws Exception {
-		
-		logger = report.startTest("Verify Drop Down Values in the Drop Down Page");
-		test.set(logger);
-		
+
+		ExtentTest logger = setLogger("Verify Drop Down Values in the Drop Down Page");
+
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
-		DropDownPage DropdownPage = new DropDownPage();
+		DropDownPage DropdownPage = new DropDownPage(getDriver());
 		
 		logger.log(LogStatus.INFO, "Verify all the options in the drop down");
 		List <String> actualvalues = DropdownPage.getAlltheValuesfromtheDropdown();
@@ -36,14 +36,13 @@ public class DropDown extends Init {
 
 	}
 
-	@Test(dependsOnMethods = { "VerifyDropDownValues" })
+	@Test()
 	public void SelectAvaluefromtheDropDown() throws Exception {
-		
-		logger = report.startTest("Select a value from the Drop Down");
-		test.set(logger);
-		
+
+		ExtentTest logger = setLogger("Select a value from the Drop Down");
+
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
-		DropDownPage DropdownPage = new DropDownPage();
+		DropDownPage DropdownPage = new DropDownPage(getDriver());
 		
 		logger.log(LogStatus.INFO, "Verify Select the value 1 from the drop down");
 		DropdownPage.SelectAValuefromTheDropDown(1);
@@ -53,21 +52,19 @@ public class DropDown extends Init {
 		
 	}
 
-	@Test(dependsOnMethods = { "methodFailed" })
+	@Test(enabled = false)
 	public void methodSkipped() throws Exception {
-		logger = report.startTest("This test case will skipped");
-		test.set(logger);
-		
+		ExtentTest logger = setLogger("This test case will skipped");
+
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
 		
 		System.out.println("This method skipped");
 	}
 
-	@Test(alwaysRun = true)
+	@Test()
 	public void methodFailed() throws Exception {
-		logger = report.startTest("This testcase will failed");
-		test.set(logger);
-		
+		ExtentTest logger = setLogger("This testcase will failed");
+
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
 		Assert.assertTrue(false);
 		
