@@ -1,13 +1,13 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
-<suite name="Suite1" verbose="2">
+
+<suite name="Suite1" verbose="2" data-provider-thread-count="4" thread-count="2" parallel="methods" preserve-order="true">
 
     <listeners>
         <listener class-name="Initialize.Listener"/>
-
     </listeners>
 
 
-    <test name="Group" preserve-order="true" parallel="classes" thread-count="3">
+    <test name="Group">
 
         <packages>
             <package name="TestCase.*"/>

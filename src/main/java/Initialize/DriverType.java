@@ -23,7 +23,7 @@ public enum DriverType implements DriverSetup {
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");
             options.addArguments("incognito");
-            options.addArguments("--headless");
+           // options.addArguments("--headless");
 
             System.setProperty("webdriver.chrome.driver", "src/test/Resource/chromedriver_win32/chromedriver.exe");
             WebDriver dr = new ChromeDriver(options);
