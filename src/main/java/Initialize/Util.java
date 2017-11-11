@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
@@ -19,12 +20,11 @@ public class Util {
 
 	private static String filePath;
 
-	public static String getFilePath() {
-		return filePath;
-	}
 
-	public static void setFilePath(String filePath) {
-		Util.filePath = filePath + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
+	public static String setFilePath(String fp) throws IOException {
+		filePath = fp + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
+		FileUtils.touch(new File(filePath));
+		return new File(filePath).getAbsolutePath();
 	}
 
 

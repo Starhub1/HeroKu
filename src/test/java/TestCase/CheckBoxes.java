@@ -6,12 +6,12 @@ import static org.testng.Assert.assertTrue;
 
 import java.util.List;
 
-import com.relevantcodes.extentreports.ExtentTest;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
-import com.relevantcodes.extentreports.LogStatus;
 
 import Pages.CheckboxPage;
 import Initialize.Init;
@@ -29,15 +29,15 @@ public class CheckBoxes extends Init {
 		getDriver().get("http://the-internet.herokuapp.com/checkboxes");
 		CheckboxPage = new CheckboxPage(getDriver());
 		
-		logger.log(LogStatus.INFO, "Select Option 1 from the checkbox list");
+		logger.log(Status.INFO, "Select Option 1 from the checkbox list");
 		CheckboxPage.selectCheckbox(5);
 		assertTrue(CheckboxPage.isSelected(1));
-		logger.log(LogStatus.PASS, "Option 1 Selected Succesfully");
+		logger.log(Status.PASS, "Option 1 Selected Succesfully");
 		
-		logger.log(LogStatus.INFO, "De-Select Option 1 from the checkbox list");
+		logger.log(Status.INFO, "De-Select Option 1 from the checkbox list");
 		CheckboxPage.deSelectCheckbox(1);
 		assertFalse(CheckboxPage.isSelected(1));
-		logger.log(LogStatus.PASS,"Option 1 De-Selected Succesfully");
+		logger.log(Status.PASS,"Option 1 De-Selected Succesfully");
 	}
 
 	@Step("Verify the {0}  page")
@@ -51,8 +51,8 @@ public class CheckBoxes extends Init {
 		
 		String header = CheckboxPage.getheader();
 		
-		logger.log(LogStatus.INFO, "Verify Header of the Checkbox Page");
+		logger.log(Status.INFO, "Verify Header of the Checkbox Page");
 		assertEquals("Checkboxes", header);
-		logger.log(LogStatus.PASS, "Header of the Checkbox page is :"+header);
+		logger.log(Status.PASS, "Header of the Checkbox page is :"+header);
 	}
 }

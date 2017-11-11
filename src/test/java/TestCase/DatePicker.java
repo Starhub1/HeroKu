@@ -2,10 +2,10 @@ package TestCase;
 
 import static org.testng.Assert.assertEquals;
 
-import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.annotations.Test;
-
-import com.relevantcodes.extentreports.LogStatus;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import org.testng.annotations.Test;
 
 import Pages.DatePickerPage;
 import Initialize.Init;
@@ -21,9 +21,9 @@ public class DatePicker extends Init {
 		getDriver().get("http://jqueryui.com/datepicker/");
 		datePickerLocator = new DatePickerPage(getDriver());
 		
-		logger.log(LogStatus.INFO, "Verify Entering a date 08/15/2018 in the date Field");
+		logger.log(Status.INFO, "Verify Entering a date 08/15/2018 in the date Field");
 		datePickerLocator.selectAdateintheDateFieled("08/15/2018");
-		logger.log(LogStatus.INFO, "The date 08/15/2018 is selected successfuly");
+		logger.log(Status.INFO, "The date 08/15/2018 is selected successfuly");
 		
 	}
 	
@@ -34,10 +34,10 @@ public class DatePicker extends Init {
 		getDriver().get("http://jqueryui.com/datepicker/");
 		datePickerLocator = new DatePickerPage(getDriver());
 		
-		logger.log(LogStatus.INFO, "Verify Header of the Page");
+		logger.log(Status.INFO, "Verify Header of the Page");
 		String header = datePickerLocator.getPageheader();
 		assertEquals(header, "Datepicker");
-		logger.log(LogStatus.PASS, "Header of the Page is "+ header);
+		logger.log(Status.PASS, "Header of the Page is "+ header);
 		
 	}
 }

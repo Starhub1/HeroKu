@@ -1,12 +1,14 @@
 package Initialize;
 
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.events.AbstractWebDriverEventListener;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import org.testng.annotations.Test;
 
 public class EventListener extends AbstractWebDriverEventListener {
 
@@ -24,13 +26,13 @@ public class EventListener extends AbstractWebDriverEventListener {
 
     public void beforeNavigateTo(String url, WebDriver driver) {
         ExtentTest logger = Init.getLogger();
-        logger.log(LogStatus.PASS, "Navigating to the url: " + url);
+        logger.log(Status.PASS, "Navigating to the url: " + url);
         System.out.println("Navigating to the url" + url + "'");
     }
 
     public void afterNavigateTo(String url, WebDriver driver) {
         ExtentTest logger = Init.getLogger();
-        logger.log(LogStatus.PASS, "Successfully  navigated  to the url: " + url);
+        logger.log(Status.PASS, "Successfully  navigated  to the url: " + url);
         System.out.println("Navigated to the url :'" + url + "'");
     }
 
@@ -70,7 +72,7 @@ public class EventListener extends AbstractWebDriverEventListener {
         jse.executeScript(script, ele);
         String text = (String) jse.executeScript("return arguments[0].innerText || arguments[0].textContent || arguments[0].value", ele);
         ExtentTest logger = Init.getLogger();
-        logger.log(LogStatus.PASS, "Trying to Click on the Element : " + text);
+        logger.log(Status.PASS, "Trying to Click on the Element : " + text);
     }
 
     public void afterClickOn(WebElement element, WebDriver driver) {
@@ -78,11 +80,11 @@ public class EventListener extends AbstractWebDriverEventListener {
             JavascriptExecutor jse = ((JavascriptExecutor) driver);
             String text = (String) jse.executeScript("return arguments[0].innerText || arguments[0].textContent || arguments[0].value", element);
             ExtentTest logger = Init.getLogger();
-            logger.log(LogStatus.PASS, "Successfully Clicked on the Element : " + text);
+            logger.log(Status.PASS, "Successfully Clicked on the Element : " + text);
 
         } catch (Exception e) {
             ExtentTest logger = Init.getLogger();
-            logger.log(LogStatus.PASS, "Successfully Clicked the Element.");
+            logger.log(Status.PASS, "Successfully Clicked the Element.");
         }
     }
 
@@ -93,7 +95,7 @@ public class EventListener extends AbstractWebDriverEventListener {
         jse.executeScript(script, ele);
         String text = (String) jse.executeScript("return arguments[0].innerText || arguments[0].textContent || arguments[0].value", ele);
         ExtentTest logger = Init.getLogger();
-        logger.log(LogStatus.PASS, "Trying to Enter the text :" + keysToSend + "on the element" + text);
+        logger.log(Status.PASS, "Trying to Enter the text :" + keysToSend + "on the element" + text);
 
     }
 
@@ -101,7 +103,7 @@ public class EventListener extends AbstractWebDriverEventListener {
         JavascriptExecutor jse = ((JavascriptExecutor) driver);
         String text = (String) jse.executeScript("return arguments[0].innerText || arguments[0].textContent || arguments[0].value", element);
         ExtentTest logger = Init.getLogger();
-        logger.log(LogStatus.PASS, "Successfuly entered the value " + keysToSend + "in the element" + text);
+        logger.log(Status.PASS, "Successfuly entered the value " + keysToSend + "in the element" + text);
     }
 
     public void beforeScript(String script, WebDriver driver) {

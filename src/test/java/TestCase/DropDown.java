@@ -5,11 +5,11 @@ import static org.testng.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
-import com.relevantcodes.extentreports.ExtentTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import com.relevantcodes.extentreports.LogStatus;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import org.testng.annotations.Test;
 
 import Pages.DropDownPage;
 import Initialize.Init;
@@ -26,11 +26,11 @@ public class DropDown extends Init {
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
 		DropDownPage DropdownPage = new DropDownPage(getDriver());
 		
-		logger.log(LogStatus.INFO, "Verify all the options in the drop down");
+		logger.log(Status.INFO, "Verify all the options in the drop down");
 		List <String> actualvalues = DropdownPage.getAlltheValuesfromtheDropdown();
 		assertEquals(actualvalues, expectedvalues);
 
-		logger.log(LogStatus.PASS, "All the options are as expected "+ actualvalues);
+		logger.log(Status.PASS, "All the options are as expected "+ actualvalues);
 
 
 
@@ -44,10 +44,10 @@ public class DropDown extends Init {
 		getDriver().get("http://the-internet.herokuapp.com/dropdown");
 		DropDownPage DropdownPage = new DropDownPage(getDriver());
 		
-		logger.log(LogStatus.INFO, "Verify Select the value 1 from the drop down");
+		logger.log(Status.INFO, "Verify Select the value 1 from the drop down");
 		DropdownPage.SelectAValuefromTheDropDown(1);
 		assertEquals(DropdownPage.getSelectedValDropDown(), "Option 1");
-		logger.log(LogStatus.PASS, "The Selected value in the drop down is " + DropdownPage.getSelectedValDropDown());
+		logger.log(Status.PASS, "The Selected value in the drop down is " + DropdownPage.getSelectedValDropDown());
 		
 		
 	}

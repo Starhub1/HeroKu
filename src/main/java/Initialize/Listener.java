@@ -1,15 +1,16 @@
 package Initialize;
 
 import java.io.File;
+import java.io.IOException;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.relevantcodes.extentreports.ExtentTest;
-import com.relevantcodes.extentreports.LogStatus;
 
 public class Listener implements ITestListener {
 
@@ -21,7 +22,7 @@ public class Listener implements ITestListener {
 	@Override
 	public void onTestSuccess(ITestResult res) {
 		ExtentTest test = Init.getLogger();
-		test.log(LogStatus.PASS,  "PASS");
+		test.log(Status.PASS,  "PASS");
 		Init.endTest();
 	}
 
@@ -43,11 +44,22 @@ public class Listener implements ITestListener {
 		}
 		String exception = res.getThrowable().getClass().getSimpleName();
 		if (exception.equalsIgnoreCase("NoSuchElementException")) {
-			test.log(LogStatus.ERROR, res.getName(), "Screenshot" + test.addScreenCapture(image));
-			test.log(LogStatus.ERROR, "Element Not Found Exception", res.getThrowable().getLocalizedMessage());
-		} else {
-			test.log(LogStatus.FAIL, res.getName(), "Screenshot" + test.addScreenCapture(image));
-			test.log(LogStatus.FAIL, res.getThrowable());
+				test.log(Status.WARNING, "Screenshot" );
+			try {
+				test.addScreenCaptureFromPath(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			test.log(Status.WARNING, res.getThrowable().getLocalizedMessage());
+		}
+		else {
+			try {
+				test.log(Status.FAIL, "Screenshot"  );
+				test.addScreenCaptureFromPath(image);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			test.log(Status.FAIL, res.getThrowable());
 		}
 
 		Init.endTest();
@@ -55,7 +67,7 @@ public class Listener implements ITestListener {
 
 	@Override
 	public void onTestSkipped(ITestResult res) {
-		EventFiringWebDriver driver = null;
+		/*EventFiringWebDriver driver = null;
 		try {
 			driver = ((Init) res.getInstance()).getDriver();
 		} catch (Exception e) {
@@ -66,7 +78,7 @@ public class Listener implements ITestListener {
 			test.log(LogStatus.SKIP, res.getName());
 			test.log(LogStatus.SKIP, res.getThrowable());
 		}
-		Init.endTest();
+		Init.endTest();*/
 
 	}
 
