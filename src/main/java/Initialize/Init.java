@@ -1,10 +1,10 @@
 package Initialize;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -14,8 +14,9 @@ import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 
 public class Init {
+	private static String path;
 	public static ExtentReports report;
-	public static ThreadLocal<Reporter> test ;
+	public static ThreadLocal<ExtentTest> test = new ThreadLocal<>() ;
 
 	private static List<WebDriverThread> webDriverThreadPool = Collections.synchronizedList(new ArrayList<WebDriverThread>());
 	private static ThreadLocal<WebDriverThread> driverThread;
@@ -25,19 +26,20 @@ public class Init {
 	}
 
 	public static ExtentTest setLogger(String testcaseName) {
-		test.get().setLogger(testcaseName);
-		return getLogger();
+		test.set(report.startTest(testcaseName));
+		return test.get();
 	}
 
 	public static void endTest() {
-		test.get().endTest();
+		report.endTest(test.get());
+		report.flush();
 	}
 	public static ExtentTest getLogger() {
-		return test.get().getLogger();
+		return test.get();
 	}
 
 	@BeforeSuite
-	public static void beforesuite() {
+	public static void beforeSuite() throws IOException {
 
 		driverThread = new ThreadLocal<WebDriverThread>() {
 			@Override
@@ -48,16 +50,8 @@ public class Init {
 			}
 		};
 
-		test= new ThreadLocal<Reporter>() {
-			@Override
-			protected Reporter initialValue() {
-				Util.setFilePath("test-results/");
-				report = new ExtentReports(Util.getFilePath(), true);
-				Reporter reporter = new Reporter();
-				return reporter;
-			}
-		};
-
+		path = Util.getFilePath("test-results/");
+		report = Reporter.createInstance(path);
 	}
 
 	@AfterSuite
@@ -65,6 +59,8 @@ public class Init {
 		for (WebDriverThread webDriverThread : webDriverThreadPool) {
 			webDriverThread.quitDriver();
 		}
+		report.flush();
+		report.close();
 	}
 
 

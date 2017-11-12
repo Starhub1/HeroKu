@@ -12,6 +12,7 @@
 
 		<classes>
 			<class name="TestCase.Login"/>
+			<class name="TestCase.DropDown"/>
 		</classes>
 	</test>
 

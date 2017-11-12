@@ -1,19 +1,25 @@
 package Initialize;
 
-import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.NetworkMode;
+
+import java.io.File;
 
 public class Reporter {
-    ExtentTest logger;
-    public void setLogger(String testcaseName){
-        logger = Init.report.startTest(testcaseName);
+    private static ExtentReports reports;
+
+    public static ExtentReports getInstance(String fileName) {
+        if (reports == null)
+            createInstance(fileName);
+
+        return reports;
     }
 
-    public ExtentTest getLogger() {
-        return logger;
-    }
+    public static ExtentReports createInstance(String fileName) {
+        reports = new ExtentReports(fileName, false, NetworkMode.ONLINE);
+        reports.loadConfig(new File(("config.xml")));
 
-    public void endTest() {
-        Init.report.endTest(logger);
-        Init.report.flush();
+        return reports;
+
     }
 }

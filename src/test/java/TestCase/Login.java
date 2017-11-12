@@ -30,7 +30,7 @@ public class Login extends Init {
         logger.log(LogStatus.PASS,"Login test Passed");
     }
 
-    @DataProvider(name = "loginData")
+    @DataProvider(name = "loginData",parallel = true)
     public Object[][] loginData() throws IOException, InvalidFormatException {
         return ExcelReader.read("test.xlsx");
     }

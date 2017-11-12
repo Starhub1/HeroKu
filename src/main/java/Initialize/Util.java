@@ -19,12 +19,11 @@ public class Util {
 
 	private static String filePath;
 
-	public static String getFilePath() {
-		return filePath;
-	}
 
-	public static void setFilePath(String filePath) {
-		Util.filePath = filePath + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
+	public static String getFilePath(String fp) throws IOException {
+		Util.filePath = fp + "Execution Report " + Util.getCurrentDateTime() + "/index.html";
+		FileUtils.touch(new File(filePath));
+		return filePath;
 	}
 
 

@@ -24,7 +24,7 @@ testreport
 test-results
 .allure
 allure-results
-
+allure-report
 
 # Logs and databases #
 ######################
