@@ -10,8 +10,8 @@ public class WebDriverThread {
 	private EventFiringWebDriver webdriver;
 	private DriverType selectedDriverType;
 
-	private final DriverType defaultDriverType = DriverType.CHROME;
-	private final String browser = "CHROME";
+	private final DriverType defaultDriverType = DriverType.REMOTE;
+	private final String browser = "REMOTE";
 	private final String operatingSystem = System.getProperty("os.name").toUpperCase();
 	private final String systemArchitecture = System.getProperty("os.arch");
 
@@ -27,6 +27,7 @@ public class WebDriverThread {
 	public void quitDriver() {
 		if (null != webdriver) {
 			webdriver.quit();
+			webdriver = null;
 		}
 	}
 
