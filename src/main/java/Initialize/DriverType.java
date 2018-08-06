@@ -22,12 +22,13 @@ public enum DriverType implements DriverSetup {
 		public EventFiringWebDriver getWebDriverObject() throws MalformedURLException {
 			// http://192.168.99.100:4444/wd/hub
 			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.acceptInsecureCerts();
+			capabilities.acceptInsecureCerts();
 
 			capabilities.setBrowserName("chrome");
 			/*
-			 * capabilities.setVersion("61.0");
-			 * capabilities.setCapability("enableVNC", true);
-			 * capabilities.setCapability("enableVideo", true);
+			 * capabilities.setVersion("61.0"); capabilities.setCapability("enableVNC",
+			 * true); capabilities.setCapability("enableVideo", true);
 			 * capabilities.setCapability("start-maximized", true);
 			 */
 
@@ -59,6 +60,7 @@ public enum DriverType implements DriverSetup {
 
 	},
 	FIREFOX {
+
 		public EventFiringWebDriver getWebDriverObject() {
 			System.setProperty("webdriver.gecko.driver", "src/test/Resource/geckodriver-v0.19.0-win32/geckodriver.exe");
 			WebDriver dr = new FirefoxDriver();

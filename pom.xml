@@ -29,21 +29,21 @@
 				<version>2.20.1</version>
 				<configuration>
 					<parallel>methods</parallel>
-					<threadCount>5</threadCount>
+					<threadCount>2</threadCount>
 					<suiteXmlFiles>
-                        <!-- TestNG suite XML files -->
-                        <suiteXmlFile>testng1.xml</suiteXmlFile>
-                    </suiteXmlFiles>
+						<!-- TestNG suite XML files -->
+						<suiteXmlFile>testng1.xml</suiteXmlFile>
+					</suiteXmlFiles>
 					<argLine>
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine>
 				</configuration>
 				<dependencies>
-				<dependency>
-					<groupId>org.aspectj</groupId>
-					<artifactId>aspectjweaver</artifactId>
-					<version>${aspectj.version}</version>
-				</dependency>
+					<dependency>
+						<groupId>org.aspectj</groupId>
+						<artifactId>aspectjweaver</artifactId>
+						<version>${aspectj.version}</version>
+					</dependency>
 				</dependencies>
 			</plugin>
 		</plugins>
@@ -57,14 +57,13 @@
 		<dependency>
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
-			<version>RELEASE</version>
+			<version>6.14.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>3.6.0</version>
+			<version>3.13.0</version>
 		</dependency>
-		<!-- pom.xml -->
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
@@ -94,7 +93,5 @@
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.17</version>
 		</dependency>
-
-
 	</dependencies>
 </project>

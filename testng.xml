@@ -3,7 +3,6 @@
 
 	<listeners>
 		<listener class-name="Initialize.Listener" />
-
 	</listeners>
 
 
@@ -11,7 +10,7 @@
 		thread-count="1">
 
 		<classes>
-			<class name="TestCase.Login"/>
+			<class name="TestCase.DragNdrop"/>
 		</classes>
 	</test>
 

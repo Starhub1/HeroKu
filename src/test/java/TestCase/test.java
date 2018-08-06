@@ -81,11 +81,10 @@ public class test {
 		dr.quit();
 		/*
 		 * System.setProperty("webdriver.chrome.driver",
-		 * "src/test/Resource/chromedriver_win32/chromedriver.exe"); WebDriver
-		 * dr = new ChromeDriver();
-		 * dr.get("http://the-internet.herokuapp.com/dynamic_controls");
-		 * JavascriptExecutor jse = (JavascriptExecutor) dr; WebElement element
-		 * = dr.findElement(By.id("btn")); String text = (String) jse.
+		 * "src/test/Resource/chromedriver_win32/chromedriver.exe"); WebDriver dr = new
+		 * ChromeDriver(); dr.get("http://the-internet.herokuapp.com/dynamic_controls");
+		 * JavascriptExecutor jse = (JavascriptExecutor) dr; WebElement element =
+		 * dr.findElement(By.id("btn")); String text = (String) jse.
 		 * executeScript("return arguments[0].innerText || arguments[0].textContent || arguments[0].value"
 		 * ,element); System.out.println(text); ExcelReader.read("test.xlsx");
 		 */

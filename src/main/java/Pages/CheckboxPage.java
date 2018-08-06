@@ -2,23 +2,24 @@ package Pages;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 public class CheckboxPage {
-	public CheckboxPage(EventFiringWebDriver driver) {
-		PageFactory.initElements(driver, this);
+	public CheckboxPage(WebDriver webDriver) {
+		PageFactory.initElements(webDriver, this);
 	}
 
 	@FindBy(css = "h3")
-	private  WebElement header;
+	private WebElement header;
 
 	@FindBy(xpath = "//input[@type='checkbox']")
-	private  List<WebElement> checkboxes;
+	private List<WebElement> checkboxes;
 
-	public  String getTitle(EventFiringWebDriver driver) {
+	public String getTitle(EventFiringWebDriver driver) {
 		return driver.getTitle();
 	}
 
@@ -43,5 +44,5 @@ public class CheckboxPage {
 	public boolean isSelected(int index) {
 		return checkboxes.toArray(new WebElement[checkboxes.size()])[index].isSelected();
 	}
-	
+
 }
