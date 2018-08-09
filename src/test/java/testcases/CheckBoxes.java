@@ -1,4 +1,4 @@
-package TestCase;
+package testcases;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Initialize.Init;
-import Pages.CheckboxPage;
+import init.Init;
+import pages.CheckboxPage;
 
 public class CheckBoxes extends Init {
 
@@ -22,6 +22,7 @@ public class CheckBoxes extends Init {
 
 	@Test()
 	public void VerifyCheckBoxFunctionality() throws Exception {
+		System.out.println("Test - The thread id is" + Thread.currentThread().getId());
 		ExtentTest logger = setLogger("Verify Checkbox functionality").assignAuthor("Mohammed Nasir")
 				.assignCategory("Category Regression");
 
@@ -41,7 +42,7 @@ public class CheckBoxes extends Init {
 
 	@Test()
 	public void VerifyheaderoftheCheckboxPage() throws Exception {
-
+		System.out.println("Test - The thread id is" + Thread.currentThread().getId());
 		ExtentTest logger = setLogger("Verify Header of the Checkbox Page").assignAuthor("Mohammed Nasir")
 				.assignCategory("Category Regression");
 

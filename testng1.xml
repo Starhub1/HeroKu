@@ -3,14 +3,14 @@
 <suite name="Suite1" verbose="3" data-provider-thread-count="2" thread-count="2" parallel="methods" preserve-order="true">
 
     <listeners>
-        <listener class-name="Initialize.Listener"/>
+        <listener class-name="init.Listener"/>
     </listeners>
 
 
     <test name="Group">
 
         <packages>
-            <package name="TestCase.*"/>
+            <package name="testcases.*"/>
         </packages>
       
     </test>

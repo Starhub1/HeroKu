@@ -1,4 +1,4 @@
-package TestCase;
+package testcases;
 
 import static org.testng.Assert.assertEquals;
 
@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Initialize.Init;
-import Pages.DatePickerPage;
+import init.Init;
+import pages.DatePickerPage;
 
 public class DatePicker extends Init {
 

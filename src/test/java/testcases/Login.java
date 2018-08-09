@@ -1,4 +1,4 @@
-package TestCase;
+package testcases;
 
 import java.io.IOException;
 
@@ -10,9 +10,9 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Initialize.ExcelReader;
-import Initialize.Init;
-import Pages.LoginPage;
+import init.ExcelReader;
+import init.Init;
+import pages.LoginPage;
 
 public class Login extends Init {
 

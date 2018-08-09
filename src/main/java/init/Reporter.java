@@ -1,4 +1,4 @@
-package Initialize;
+package init;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;

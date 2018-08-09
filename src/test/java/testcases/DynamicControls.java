@@ -1,4 +1,4 @@
-package TestCase;
+package testcases;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
@@ -9,8 +9,8 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Initialize.Init;
-import Pages.DynamicControlPage;
+import init.Init;
+import pages.DynamicControlPage;
 
 public class DynamicControls extends Init {
 

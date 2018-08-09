@@ -1,4 +1,4 @@
-package TestCase;
+package testcases;
 
 import static org.testng.Assert.assertEquals;
 
@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 
-import Initialize.Init;
-import Pages.MousehoverPage;
+import init.Init;
+import pages.MousehoverPage;
 
 public class MouseHover extends Init {
 
